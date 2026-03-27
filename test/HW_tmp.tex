@@ -1,0 +1,69 @@
+% !TEX program = lualatex
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage{fontspec}
+\setmainfont{Linux Libertine O}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm}
+
+% Определение команд для распределений
+\newcommand{\Normal}{\mathcal{N}}
+\newcommand{\Poisson}{\mathrm{Poisson}}
+
+% Окружение для решений
+\newenvironment{solution}{\textbf{Решение.}\par}{\hfill$\square$}
+
+% Команда для ответа (принимает математическое выражение, без дополнительных \(...\))
+\newcommand{\answer}[1]{\textbf{Ответ:} \boxed{#1}}
+
+% Вероятностные обозначения
+\newcommand{\Pp}{\mathbb{P}}
+\newcommand{\Ee}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\dist}{\sim}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+\newcommand{\disteq}{\stackrel{d}{=}}
+
+% Числовые множества
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{\textbf{Теория вероятностей}\\Домашнее задание №1}
+\author{Ваше Имя}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}[label=\textbf{\arabic*.}, left=0pt]
+
+\item Условие задачи 1.
+
+\begin{solution}
+Решение задачи 1.
+\[
+\Pp(A) = 0.5, \quad \Ee X = 2, \quad \Var X = 1.
+\]
+\answer{0.5}
+\end{solution}
+
+\item Условие задачи 2.
+
+\begin{solution}
+Решение задачи 2.
+\[
+X \dist \Normal(0,1), \quad Y \dist \Poisson(3), \quad \Cov(X,Y)=0.
+\]
+\answer{3}
+\end{solution}
+
+\end{enumerate}
+
+\end{document}
