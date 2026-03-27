@@ -2,7 +2,8 @@
 \documentclass[12pt]{article}
 \usepackage{fullpage}
 \usepackage{fontspec}
-\setmainfont{Linux Libertine O}
+% \setmainfont{Linux Libertine O}
+\setmainfont{Times New Roman}
 \usepackage{amsmath, amssymb, amsthm, mathtools}
 \usepackage{enumitem}
 \usepackage{geometry}
@@ -124,12 +125,35 @@ U_{(i-1)}\) имеют одинаковое распределение при в
 \answer{f_X(x) = \exp(-\sum_{1}^{n} x_i) \cdot \mathbf{1}_{x_i \ge 0, \forall i}}
 \end{solution}
 
-\item Пусть Z1, Z2, . . .  н.о.р. случайные величины с экспоненциальным распределе-
-нием. Положим S0 = 0, Si = Z1   · · ·   Zi при i   N. Пусть Vi такие же, как в задаче 1,
+\item Пусть \(Z_1, Z_2, \dots\)  н.о.р. случайные величины с экспоненциальным распределением. Положим \(S_0 = 0\), \(S_i = Z_1 + \dots + Z_i\) при \(i \in \N\). Пусть \(V_i\) такие же, как в задаче 1,и при этом независимы от случайной величины \(S_{n+1}\). Покажите, что случайный вектор \((S{n+1}V_1, S_{n+1}V_2, \dots , S_{n+1}V_{n+1})\) имеет такое же распределение, как \((Z_1, Z_2, . . . , Z_{n+1})\).
 
-и при этом независимы от случайной величины Sn 1. Покажите, что случайный вектор
-(Sn 1V1, Sn 1V2, . . . , Sn 1Vn 1) имеет такое же распределение, как (Z1, Z2, . . . , Zn 1).
-
+\begin{solution}
+    \begin{enumerate}
+        \item \(f_Z(x) = \begin{cases}
+            1 - e^{-\lambda x}, & x \ge 0 \\
+            0, & x < 0
+        \end{cases}\)
+        \item \(f_{Z_1, \dots, Z_{n+1}}(x_1, \dots, x_{n+1}) = \begin{cases}
+            \prod_{1}^{n+1} 1 - e^{-\lambda x_i}, X \in [0, +\infty]^n \\
+            0, X \notin [0, +\infty]^n \\
+        \end{cases}\)
+        \item\( S = \left(\begin{matrix}
+            S_0\\\vdots\\S_{n+1}
+        \end{matrix}\right) = \left(
+            \begin{matrix}
+                0 & 0 & \cdots & 0 \\
+                0 & 1 & \ddots & \vdots \\
+                0 & \vdots & \ddots & 0 \\
+                0 & 1 & \cdots & 1 \\
+            \end{matrix}
+        \right) \left(
+            \begin{matrix}
+                0 \\ Z_1 \\ \vdots \\ Z_{n+1}
+            \end{matrix}
+        \right)
+        \)
+    \end{enumerate}
+\end{solution}
 \end{enumerate}
 
 \end{document}
