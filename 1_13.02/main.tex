@@ -2,8 +2,8 @@
 \documentclass[12pt]{article}
 \usepackage{fullpage}
 \usepackage{fontspec}
-% \setmainfont{Linux Libertine O}
-\setmainfont{Times New Roman}
+\setmainfont{Linux Libertine O}
+% \setmainfont{Times New Roman}
 \usepackage{amsmath, amssymb, amsthm, mathtools}
 \usepackage{enumitem}
 \usepackage{geometry}
@@ -45,115 +45,100 @@
 
 \begin{enumerate}[label=\textbf{\arabic*.}, left=0pt]
 
-\item Случайные величины \(U_1, \dots, U_n\) независимы и имеют равномерное распределение
-на \([0, 1]\). Пусть \(U_{(1)}, \dots, U_{(n)}\) их порядковая статистика; обозначим также \(U_{(0)} = 0\) и
-\(U_{(n+1)} = 1\). Докажите, что интервалы между порядковыми статистиками \(V_i := U_{(i)} - 
-U_{(i-1)}\) имеют одинаковое распределение при всех \(i = 1, \dots , n+1\) и найдите это распре-
-деление. Верно ли, что \(V_i\) независимые случайные величины?
+    \item Случайные величины \(U_1, \dots, U_n\) независимы и имеют равномерное распределение
+          на \([0, 1]\). Пусть \(U_{(1)}, \dots, U_{(n)}\) их порядковая статистика; обозначим также \(U_{(0)} = 0\) и
+          \(U_{(n+1)} = 1\). Докажите, что интервалы между порядковыми статистиками \(V_i := U_{(i)} -
+          U_{(i-1)}\) имеют одинаковое распределение при всех \(i = 1, \dots , n+1\) и найдите это распре-
+          деление. Верно ли, что \(V_i\) независимые случайные величины?
 
-\begin{solution}
-\begin{enumerate}
-    \item \(f_{U_i}(x) = \mathbf{1}_{[0, 1]}\)
-    \item \(f_U(X) = f_{U_1, \dots, U_n}(x_1, \dots, x_n) = \prod_1^n f_{U_i}(x) = \mathbf{1}_{[0, 1]^n}\)
-    \item \(\overline{U} = (U_{(1)}, \dots, U_{(n)}, 1)\)
-    \item \(f_{\overline{U}}(X) = f_{\overline{U}}(x_1, \dots, x_n, x_{n+1}) = 
-    \begin{cases}
-        n! \cdot \prod_1^n f_{U_i}(x) = n!, & 
-        \begin{matrix} 0 \le x_1 < \cdots < x_n \le 1, \\ x_{n+1}=1\end{matrix}\\
-        0, & \text{иначе}
-    \end{cases} \)
-    \item \( A = \left(
-    \begin{matrix}
-        1 & 0 & 0 & \cdots & 0 \\
-        -1 & \ddots & \ddots & \ddots & \vdots \\
-        0 & \ddots & \ddots & \ddots & 0 \\
-        \vdots & \ddots & \ddots & \ddots & 0 \\
-        0 & \cdots & 0 & -1 & 1 \\
-    \end{matrix}\right) \in \mathbb{M}(n+1); 
-    \hspace{5pt} \det A = 1; \hspace{5pt}
-    A^{-1} = \left(
-    \begin{matrix}
-        1 & 0 & \cdots & 0 \\
-        1 & \ddots & \ddots & \vdots \\
-        \vdots & \ddots & \ddots & 0 \\
-        1 & \cdots & 1 & 1 \\
-    \end{matrix}\right)\)
-    \item \(V = g(\overline{U}) = A \overline{U}\)
-    \item \(f_V(Y)\) -- такая функция, что \(\int_{g(D)} f_V(Y)dY = \int_{D} f_{\overline{U}}(X)dX\)
-    \item Так как g - диффеоморфизм, можно провести замену переменных \(Y = g(X)\) в интеграле дифформы \\
-    \(\int_{D} f_{\overline{U}}(X)dX = \int_{g(D)} f_{\overline{U}}(g^{-1}(Y)) |\det(J_{g^{-1}})|dY\)
-    \item \(f_V(Y) = f_{\overline{U}}(g^{-1}(Y)) |\det(J_{g^{-1}})|\)
-    \item \(\det(J_{g^{-1}}) = \det(J_{A^{-1}Y}) = \det(A^{-1}) \Rightarrow \det J_{A^{-1}} = 1\)
-    \item \(f_V(Y) = f_{\overline{U}}(A^{-1}(Y)) = 
-    \begin{cases}
-        n!, & y_i > 0, \sum_1^{n+1} y_i \\
-        0,  & \text{иначе}
-    \end{cases}\)
-    \item \(\forall i: f_{V_i}(y) = n! \cdot \int_{\substack{v_j > 0 \\ \sum v_j = 1-y}}dv_1 \dots dv_{i-1}dv_{i+1}\dots dv_{n+1} = n! \cdot \frac{(1-y)^{n-1}}{(n-1)!} = n{(1-y)}^{n-1}\) - (объем прямоугольного \((n-1)\) -- симплекса с попправкой на перестановку)
-    \item \(V_i = 1 - \sum_{j \neq i} V_j\) -- явная завивисмость.
-\end{enumerate}
-\answer{\text{Нет, не верно}}
-\end{solution}
+          \begin{solution}
+              \begin{enumerate}
+                  \item \(f_{U_i}(x) = \mathbf{1}_{[0, 1]}\)
+                  \item \(f_U(X) = f_{U_1, \dots, U_n}(x_1, \dots, x_n) = \prod_1^n f_{U_i}(x) = \mathbf{1}_{[0, 1]^n}\)
+                  \item \(\overline{U} = (U_{(1)}, \dots, U_{(n)}, 1)\)
+                  \item \(f_{\overline{U}}(X) = f_{\overline{U}}(x_1, \dots, x_n, x_{n+1}) =
+                        \begin{cases}
+                            n! \cdot \prod_1^n f_{U_i}(x) = n!, &
+                            \begin{matrix} 0 \le x_1 < \cdots < x_n \le 1, \\ x_{n+1}=1\end{matrix} \\
+                            0,                                  & \text{иначе}
+                        \end{cases} \)
+                  \item \( A = \left(
+                        \begin{matrix}
+                                1      & 0      & 0      & \cdots & 0      \\
+                                -1     & \ddots & \ddots & \ddots & \vdots \\
+                                0      & \ddots & \ddots & \ddots & 0      \\
+                                \vdots & \ddots & \ddots & \ddots & 0      \\
+                                0      & \cdots & 0      & -1     & 1      \\
+                            \end{matrix}\right) \in \mathbb{M}(n+1);
+                        \hspace{5pt} \det A = 1; \hspace{5pt}
+                        A^{-1} = \left(
+                        \begin{matrix}
+                                1      & 0      & \cdots & 0      \\
+                                1      & \ddots & \ddots & \vdots \\
+                                \vdots & \ddots & \ddots & 0      \\
+                                1      & \cdots & 1      & 1      \\
+                            \end{matrix}\right)\)
+                  \item \(V = g(\overline{U}) = A \overline{U}\)
+                  \item \(f_V(Y)\) -- такая функция, что \(\int_{g(D)} f_V(Y)dY = \int_{D} f_{\overline{U}}(X)dX\)
+                  \item Так как g - диффеоморфизм, можно провести замену переменных \(Y = g(X)\) в интеграле дифформы \\
+                        \(\int_{D} f_{\overline{U}}(X)dX = \int_{g(D)} f_{\overline{U}}(g^{-1}(Y)) |\det(J_{g^{-1}})|dY\)
+                  \item \(f_V(Y) = f_{\overline{U}}(g^{-1}(Y)) |\det(J_{g^{-1}})|\)
+                  \item \(\det(J_{g^{-1}}) = \det(J_{A^{-1}Y}) = \det(A^{-1}) \Rightarrow \det J_{A^{-1}} = 1\)
+                  \item \(f_V(Y) = f_{\overline{U}}(A^{-1}(Y)) =
+                        \begin{cases}
+                            n!, & y_i > 0, \sum_1^{n+1} y_i \\
+                            0,  & \text{иначе}
+                        \end{cases}\)
+                  \item \(\forall i: f_{V_i}(y) = n! \cdot \int_{\substack{v_j > 0 \\ \sum v_j = 1-y}}dv_1 \dots dv_{i-1}dv_{i+1}\dots dv_{n+1} = n! \cdot \frac{(1-y)^{n-1}}{(n-1)!} = n{(1-y)}^{n-1}\) - (объем прямоугольного \((n-1)\) -- симплекса с попправкой на перестановку)
+                  \item \(V_i = 1 - \sum_{j \neq i} V_j\) -- явная завивисмость.
+              \end{enumerate}
+              \answer{\text{Нет, не верно}}
+          \end{solution}
 
-\item В условиях задачи 1 положим \(X_i = f(U_i), i = 1, \dots , n\), где \(f(u) = - \ln(1 - u)\). Каким будет совместное распределение \(X_1, \dots , X_n\)? Проверьте, что порядковую стати-
-стику \(X_{(1)}, \dots , X_{(m)}\) можно найти как \(X_{(i)} = f(U_{(i)})\).
+    \item В условиях задачи 1 положим \(X_i = f(U_i), i = 1, \dots , n\), где \(f(u) = - \ln(1 - u)\). Каким будет совместное распределение \(X_1, \dots , X_n\)? Проверьте, что порядковую стати-
+          стику \(X_{(1)}, \dots , X_{(m)}\) можно найти как \(X_{(i)} = f(U_{(i)})\).
 
-\begin{solution}
-\begin{enumerate}
-    \item Вместо f буду писать g, чтобы не путаться в плотности и функции.
-    \item По аналогии с предыдущей задачей, 
-    \(X = g(U) = \left(\begin{matrix}
-        -\ln(1-U_1) \\
-        \vdots \\
-        -\ln(1-U_n) \\     
-    \end{matrix}\right)\), тогда
-    \item \(f_X = \left(f_U \circ g^{-1}\right) \cdot |\det J_{g^{-1}}|\)
-    \item \(g^{-1}(X) = \left(\begin{matrix}
-        1-\exp(-X_1) \\
-        \vdots \\
-        1-\exp(-X_n) \\     
-    \end{matrix}\right)\)
-    \item \(J_{g^{-1}}(x) = \left(\begin{matrix}
-        \exp(-x_1) & 0 & 0 \\
-        0 & \ddots & 0 \\
-        0 & 0 & \exp(-x_n) \\
-    \end{matrix}\right)\)
-    \item \(\det J_{g^{-1}}(x) = \prod_{1}^{n} \exp(-x_i) = \exp(-\sum_{1}^{n} x_i)\)
-    \item \(f_X(x) = f_U(1-\exp(-x_1), \dots, 1-\exp(-x_n)) \cdot \exp(-\sum_{1}^{n} x_i) = \\ = \exp(-\sum_{1}^{n} x_i) \cdot \mathbf{1}_{g^{-1}(x) \in [0, 1]^n} = \exp(-\sum_{1}^{n} x_i) \cdot \mathbf{1}_{x_i \ge 0, \forall i} = \)
-    \item \(-\ln(1-x)\) - монотонно возрастающая функциия, следовательно \(U_{(1)} \le \cdots \le U_{(n)} \Leftrightarrow g(U_{(1)}) \le \cdots \le g(U_{(n)})\)
-\end{enumerate}
-\answer{f_X(x) = \exp(-\sum_{1}^{n} x_i) \cdot \mathbf{1}_{x_i \ge 0, \forall i}}
-\end{solution}
+          \begin{solution}
+              \begin{enumerate}
+                  \item Вместо f буду писать g, чтобы не путаться в плотности и функции.
+                  \item По аналогии с предыдущей задачей,
+                        \(X = g(U) = \left(\begin{matrix}
+                            -\ln(1-U_1) \\
+                            \vdots      \\
+                            -\ln(1-U_n) \\
+                        \end{matrix}\right)\), тогда
+                  \item \(f_X = \left(f_U \circ g^{-1}\right) \cdot |\det J_{g^{-1}}|\)
+                  \item \(g^{-1}(X) = \left(\begin{matrix}
+                                1-\exp(-X_1) \\
+                                \vdots       \\
+                                1-\exp(-X_n) \\
+                            \end{matrix}\right)\)
+                  \item \(J_{g^{-1}}(x) = \left(\begin{matrix}
+                                \exp(-x_1) & 0      & 0          \\
+                                0          & \ddots & 0          \\
+                                0          & 0      & \exp(-x_n) \\
+                            \end{matrix}\right)\)
+                  \item \(\det J_{g^{-1}}(x) = \prod_{1}^{n} \exp(-x_i) = \exp(-\sum_{1}^{n} x_i)\)
+                  \item \(f_X(x) = f_U(1-\exp(-x_1), \dots, 1-\exp(-x_n)) \cdot \exp(-\sum_{1}^{n} x_i) = \\ = \exp(-\sum_{1}^{n} x_i) \cdot \mathbf{1}_{g^{-1}(x) \in [0, 1]^n} = \exp(-\sum_{1}^{n} x_i) \cdot \mathbf{1}_{x_i \ge 0, \forall i} = \)
+                  \item \(-\ln(1-x)\) - монотонно возрастающая функциия, следовательно \(U_{(1)} \le \cdots \le U_{(n)} \Leftrightarrow g(U_{(1)}) \le \cdots \le g(U_{(n)})\)
+              \end{enumerate}
+              \answer{f_X(x) = \exp(-\sum_{1}^{n} x_i) \cdot \mathbf{1}_{x_i \ge 0, \forall i}}
+          \end{solution}
 
-\item Пусть \(Z_1, Z_2, \dots\)  н.о.р. случайные величины с экспоненциальным распределением. Положим \(S_0 = 0\), \(S_i = Z_1 + \dots + Z_i\) при \(i \in \N\). Пусть \(V_i\) такие же, как в задаче 1,и при этом независимы от случайной величины \(S_{n+1}\). Покажите, что случайный вектор \((S{n+1}V_1, S_{n+1}V_2, \dots , S_{n+1}V_{n+1})\) имеет такое же распределение, как \((Z_1, Z_2, . . . , Z_{n+1})\).
+    \item Пусть \(Z_1, Z_2, \dots\)  н.о.о. случайные величины с экспоненциальным распределением. Положим \(S_0 = 0\), \(S_i = Z_1 + \dots + Z_i\) при \(i \in \N\). Пусть \(V_i\) такие же, как в задаче 1,и при этом независимы от случайной величины \(S_{n+1}\). Покажите, что случайный вектор \((S{n+1}V_1, S_{n+1}V_2, \dots , S_{n+1}V_{n+1})\) имеет такое же распределение, как \((Z_1, Z_2, . . . , Z_{n+1})\).
 
-\begin{solution}
-    \begin{enumerate}
-        \item \(f_Z(x) = \begin{cases}
-            1 - e^{-\lambda x}, & x \ge 0 \\
-            0, & x < 0
-        \end{cases}\)
-        \item \(f_{Z_1, \dots, Z_{n+1}}(x_1, \dots, x_{n+1}) = \begin{cases}
-            \prod_{1}^{n+1} 1 - e^{-\lambda x_i}, X \in [0, +\infty]^n \\
-            0, X \notin [0, +\infty]^n \\
-        \end{cases}\)
-        \item\( S = \left(\begin{matrix}
-            S_0\\\vdots\\S_{n+1}
-        \end{matrix}\right) = \left(
-            \begin{matrix}
-                0 & 0 & \cdots & 0 \\
-                0 & 1 & \ddots & \vdots \\
-                0 & \vdots & \ddots & 0 \\
-                0 & 1 & \cdots & 1 \\
-            \end{matrix}
-        \right) \left(
-            \begin{matrix}
-                0 \\ Z_1 \\ \vdots \\ Z_{n+1}
-            \end{matrix}
-        \right)
-        \)
-    \end{enumerate}
-\end{solution}
+          \begin{solution}
+              \begin{enumerate}
+                  \item \(Z = \left(\begin{matrix}
+                            Z_1 \\ \vdots \\ Z_{n+1}
+                        \end{matrix}\right)\)
+                  \item \(f_Z(X) = \mathbf{1}_{{[0, +\infty]}^{n+1}}\cdot\lambda^{n+1} e^{-\lambda \sum_{1}^{n+1}x_i}\)
+                  \item \(U \sim Uniform({[0, 1]}^{n+1})\)
+                  \item \(f_U = \mathbf{1}_{{[0, 1]^{n+1}}}\)
+                  \item \(Z = - \frac{1}{\lambda} \ln{U}\)
+                  \item
+              \end{enumerate}
+          \end{solution}
 \end{enumerate}
 
 \end{document}
