@@ -1,0 +1,110 @@
+% !TEX program = lualatex
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage{fontspec}
+% \setmainfont{Linux Libertine O}
+\setmainfont{Times New Roman}
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm}
+
+% Определение команд для распределений
+\newcommand{\Normal}{\mathcal{N}}
+\newcommand{\Poisson}{\mathrm{Poisson}}
+
+% Окружение для решений
+\newenvironment{solution}{\textbf{Решение.}\par}{\hfill\(\square\)}
+
+% Команда для ответа (принимает математическое выражение, без дополнительных \(...\))
+\newcommand{\answer}[1]{\textbf{Ответ:} \boxed{#1}}
+
+% Вероятностные обозначения
+\newcommand{\Pp}{\mathbb{P}}
+\newcommand{\Ee}{\mathbb{E}}
+\newcommand{\ind}{\mathbf{1}} 
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\dist}{\sim}
+\newcommand{\iid}{\stackrel{\mathrm{i.i.d.}}{\sim}}
+\newcommand{\disteq}{\stackrel{d}{=}}
+
+% Числовые множества
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{\textbf{Матстат}\\Домашнее задание № 2 к 20.02}
+\author{Есиков Сергей Дмитриевич}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}[label=\textbf{\arabic*.}, left=0pt]
+    \item Пусть \(U_{(1)}, . . . , U_{(n)}\) порядковая статистика выборки из равномерного распределения на \([0, 1]\). Покажите, что случайный вектор \((nU_{(1)}, n(1 − U_{(n)}))\) сходится по распределению при \(n \rightarrow \infty\) к случайному вектору \((X, Y)\), компоненты которого одинаково распределены и независимы, и найдите его распределение.
+
+          \begin{solution}
+              \begin{enumerate}
+                  \item \(U = Uniform({[0, 1]}^{n})\)
+                  \item \(U_{(1)} = \min{\{U_i\}}\)
+                  \item \(U_{(n)} = \max{\{U_i\}}\)
+                  \item \(\Pp(U_{(1)} > u) = {(1-u)}^{n} \cdot \ind_{{[0, 1]}}(u)\)
+                  \item \(F_{nU_{(1)}}(x) = \Pp(nU_{(1)} \le x) = 1 - \Pp(U_{(1)} > \frac{x}{n}) = 1 - {(1-\frac{x}{n})}^{n} \cdot \ind_{{[0, 1]}}(\frac{x}{n})\)
+                  \item \(F_{nU_{(1)}}(x) \rightarrow (1 - e^{-x})\)
+                  \item \(f_{nU_{(1)}}(x) \rightarrow e^{-x} = f_{X}(x)\)
+                  \item \(\Pp(U_{(n)} \le u) = {u}^{n} \cdot \ind_{{[0, 1]}}(u)\)
+                  \item \(F_{n(1 - U_{(n)})}(y) = \Pp(n(1 - U_{(n)}) \le y) = \Pp(-U_{(n)} \le \frac{y}{n} - 1) = \Pp(U_{(n)} > 1 - \frac{y}{n}) = 1 - \Pp(U_{(n)} \le 1 - \frac{y}{n}) = 1 - {(1-\frac{y}{n})}^{n} \cdot \ind_{{[0, 1]}}(1 - \frac{y}{n})\)
+                  \item \(F_{n(1 - U_{(n)})}(y) \rightarrow (1 - e^{-y})\)
+                  \item \(f_{n(1 - U_{(n)})}(y) \rightarrow e^{-y} = f_{Y}(y)\)
+                  \item \(f_{U_{(1)}, U_{(n)}}(u, v) = \Pp\left(\left(\forall i: U_i \in [u, v]\right) \land \left(\exists j_1: U_{j_1} = u\right) \land \left(\exists j_2: U_{j_2} = v\right)\right) = n(n-1){(v-u)}^{n-2}\cdot \ind_{{0 \le u \le v \le 1}}(u, v)\)
+                  \item \((x, y) = g(u, v) = (nu, n(1-v))\)
+                  \item \(g^{-1}(x, y) = (\frac{x}{n}, 1-\frac{y}{n})\)
+                  \item \(J_{g^{-1}} = \det\left({diag(\frac{1}{n}, -\frac{1}{n})}\right) = -\frac{1}{n^2}\)
+                  \item \(f_{nU_{(1)}, n(1 - U_{(n)})}(x, y) = f_{U_{(1)}, U_{(n)}}(g^{-1}(x, y))\cdot|J_{g^{-1}}| = n(n-1){(1 -\frac{y}{n} - \frac{x}{n})}^{n-2} \cdot \frac{1}{n^2} \cdot \ind_{{0 \le \frac{x}{n} \le 1 - \frac{y}{n} \le 1}}(x, y)\)
+                  \item \(0 \le \frac{x}{n} \le 1 - \frac{y}{n} \le 1 \Leftrightarrow 0 \le \frac{y}{n} \le 1 - \frac{x}{n} \le 1 \Leftrightarrow 0 \le y \le n - x \le n\)
+                  \item \(f_{nU_{(1)}, n(1 - U_{(n)})}(x, y) = \frac{n(n-1)}{n^2} \cdot {(1 - \frac{x+y}{n})}^{n-2} \cdot \ind_{{\left(x, y \ge 0\right) \land \left(x+y \le n\right)}}(x, y)\)
+                  \item \(f_{nU_{(1)}, n(1 - U_{(n)})}(x, y) \rightarrow f_{X, Y}(x, y) = 1 \cdot e^{-(x+y)} = f_{X}(x) \cdot f_{Y}(y)\)
+              \end{enumerate}
+              \answer{f_{X, Y}(x, y) = e^{-(x+y)}}
+          \end{solution}
+    
+    \item Пусть \(X_{(n)}\) максимум выборки объема \(n\) из стандартного экспоненциального распределения. Подберите последовательности \((a_n)\) и \((b_n)\) так, чтобы \(a_n(X_{(n)} − b_n)\) сходилось по распределению при \(n → \infty\), и найдите предельное распределение.
+    
+          \begin{solution}
+              \begin{enumerate}
+                  \item \(F_{X_i}(x) = (1 - e^{-x}) \cdot \ind_{\left[0, +\infty\right]}(x)\)
+                  \item \(F_{X_{(n)}}(x) = \Pp(X_{(n)} \le x) = \Pp(\forall i: X_i \le x) = \prod (1 - e^{-x}) \cdot \ind_{\left[0, +\infty\right]}(x) = \ind_{\left[0, +\infty\right]}(x) \cdot {(1 - e^{-x})}^{n}\)
+                  \item \(F_{a_n(X_{(n)}-b_n)}(x) = \Pp(a_n(X_{(n)}-b_n \le x) = \Pp(X_{(n)} \le \frac{x}{a_n} + b_n) = \ind_{\left[0, +\infty\right]}(\frac{x}{a_n} + b_n) \cdot {(1 - e^{-{\frac{x}{a_n} + b_n}})}^{n} = \ind_{\left[-{a}_{n}{b}_{n}, +\infty\right]}(x) {(1 - e^{-{\frac{x}{a_n} + b_n}})}^{n}\)
+                  \item \(\lim F_{a_n(X_{(n)}-b_n)}(x) = \ind_{\left[-lim\left({a}_{n}{b}_{n}\right), +\infty\right]}(x) {(1 - \lim e^{-{\frac{x}{a_n} + b_n}})}^{n}\)
+                  \item Наименее строгая ассимптотика, допускающая существование этого предела это \(e^{-{\frac{x}{a_n} + b_n}} \rightarrow \frac{f(x)}{n}\), тогда
+                  \item \(\lim F_{a_n(X_{(n)}-b_n)}(x) = \ind_{\left[-lim\left({a}_{n}{b}_{n}\right), +\infty\right]}(x) {(1 - \frac{f(x)}{n})}^{n} = \ind_{\left[-lim\left({a}_{n}{b}_{n}\right), +\infty\right]}(x)e^{-f(x)}\)
+                  \item \(e^{-{\frac{x}{a_n} + b_n}} \rightarrow e^{-b_n} \cdot e^{-x/a_n}\)
+                  \item \(e^{-b_n} \cdot e^{-x/a_n} \rightarrow \frac{f(x)}{n}\)
+                  \item \(\begin{cases}
+                    e^{-b_n} \rightarrow \frac{C_1}{n} \\
+                    e^{-x/a_n} \rightarrow f(x)
+                  \end{cases}\)
+                  \item \(\begin{cases}
+                    b_n \rightarrow \ln(C_1)+\ln(n) \\
+                    e^{-x/a_n} \rightarrow e^{C_2x}
+                  \end{cases}\)
+                  \item \(\begin{cases}
+                    b_n \rightarrow C_1 + ln(n) \\
+                    a_n \rightarrow C_2
+                  \end{cases}\)
+                  \item \(a_nb_n \not\rightarrow -\infty \Rightarrow C_2\ln(n) > 0 \Rightarrow C_2 > 0\)
+                  \item \(\begin{cases}
+                    a_n \rightarrow C_1, C_1 > 0\\
+                    b_n \rightarrow ln(n) + C_2, C_2 \in \R
+                  \end{cases}\)
+                  \item \(\lim F_{a_n(X_{(n)}-b_n)}(x) = e^{-c_2\cdot e^{-c_1x}}\) 
+              \end{enumerate}
+              \answer{\exp{\left(-c_2 \cdot e^{-c_1 \cdot x}\right)}, c_1 > 0}
+          \end{solution}
+\end{enumerate}
+
+\end{document}
+
